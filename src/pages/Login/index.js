@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isDisabled = () => {
@@ -21,6 +23,7 @@ function Login() {
   }, [email, password]);
 
   const onButtonClick = () => {
+    navigate('/wallet');
   };
 
   return (
