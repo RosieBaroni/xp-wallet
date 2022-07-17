@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { saveEmail } from '../../utils/localStorage'
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +25,7 @@ function Login() {
   }, [email, password]);
 
   const onButtonClick = () => {
+    saveEmail(email);
     navigate('/wallet');
   };
 
