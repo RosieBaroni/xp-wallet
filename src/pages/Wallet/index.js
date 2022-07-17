@@ -1,9 +1,14 @@
 import React from 'react';
+
+import Header from '../../components/Header/Header';
 import StocksTable from '../../components/StocksTable';
 
 function Wallet() {
   return (
-    <StocksTable />
+    <>
+      <Header />
+      <StocksTable />
+    </>
   )
 }
 
