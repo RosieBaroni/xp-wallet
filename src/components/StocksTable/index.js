@@ -1,20 +1,6 @@
 import React from 'react';
 
-function StocksTable({ stocks }) {
-  const columns = [
-    'Ação',
-    'Quantidade',
-    'Valor (R$)',
-    'Negociar',
-  ]
-
-  const onButtonBuy = () => {
-  };
-
-  const onButtonSell = () => {
-  };
-
-
+function StocksTable({ columns, renderRows }) {
   return (
     <table>
       <thead>
@@ -26,35 +12,7 @@ function StocksTable({ stocks }) {
       </thead>
 
       <tbody>
-        {stocks?.map((stock) => (
-          <tr key={stock.id}>
-            <td>
-              {stock.symbol}
-            </td>
-            <td>
-              1
-            </td>
-            <td>
-              {stock.price}
-            </td>
-            <td>
-              <button
-                type="button"
-                onClick={onButtonBuy}
-              >
-                Comprar
-              </button>
-            </td>
-            <td>
-              <button
-                type="button"
-                onClick={onButtonSell}
-              >
-                Vender
-              </button>
-            </td>
-          </tr>
-        ))}
+        {renderRows()}
       </tbody>
     </table >
   )
