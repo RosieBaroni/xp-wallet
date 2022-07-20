@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/wallet" element={<Wallet />} />
-      <Route path="/negotiate" element={<Negotiate />} />
+      <Route path="/negotiate/:stockId" element={<Negotiate />} />
     </Routes>
   );
 }
