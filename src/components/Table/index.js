@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StocksTable({ columns, renderRows }) {
+function Table({ columns, renderRows }) {
   return (
     <table>
       <thead>
@@ -18,4 +18,4 @@ function StocksTable({ columns, renderRows }) {
   )
 }
 
-export default StocksTable;
+export default Table;
