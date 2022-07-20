@@ -16,7 +16,6 @@ function Wallet() {
     'Ação',
     'Quantidade',
     'Valor (R$)',
-    'Negociar',
   ];
 
   const navigate = useNavigate();
@@ -32,11 +31,18 @@ function Wallet() {
           {stock.symbol}
         </td>
         <td>
-          1
+          {stock.amount || 1}
         </td>
         <td>
           {stock.price}
         </td>
+        {stock.amount ?
+          (
+            <td>
+              {(stock.price * stock.amount).toFixed(2)}
+            </td>
+          ) : null
+        }
         <td>
           <button
             type="button"
@@ -44,8 +50,7 @@ function Wallet() {
           >
             Comprar
           </button>
-        </td>
-        <td>
+
           {userStocks.some((item) => item.id === stock.id) ?
             (
               <button
@@ -66,10 +71,10 @@ function Wallet() {
       <Header />
 
       <h2>Minhas Ações:</h2>
-      <Table columns={columns} renderRows={() => renderStocks(userStocks)} />
+      <Table columns={[...columns, 'Valor total (R$)', 'Negociar']} renderRows={() => renderStocks(userStocks)} />
 
       <h2>Disponíveis para investir:</h2>
-      <Table columns={columns} renderRows={() => renderStocks(availableStocks)} />
+      <Table columns={[...columns, 'Negociar']} renderRows={() => renderStocks(availableStocks)} />
     </div>
   )
 }
