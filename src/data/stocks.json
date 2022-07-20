@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "symbol": "RADL3",
+    "price": 20.85
+  },
+  {
+    "id": 2,
+    "symbol": "EQTL3",
+    "price": 22.45
+  },
+  {
+    "id": 3,
+    "symbol": "BRML3",
+    "price": 7.57
+  },
+  {
+    "id": 4,
+    "symbol": "ECOR3",
+    "price": 5.23
+  },
+  {
+    "id": 5,
+    "symbol": "ENBR3",
+    "price": 20.61
+  },
+  {
+    "id": 6,
+    "symbol": "UGPA3",
+    "price": 11.87
+  },
+  {
+    "id": 7,
+    "symbol": "BBDC4",
+    "price": 16.44
+  },
+  {
+    "id": 8,
+    "symbol": "CMIG4",
+    "price": 10.45
+  },
+  {
+    "id": 9,
+    "symbol": "LREN3",
+    "price": 25.07
+  },
+  {
+    "id": 10,
+    "symbol": "PETR4",
+    "price": 27.96
+  }
+]
