@@ -1,28 +1,31 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../../components/Header/Header';
-import StocksTable from '../../components/StocksTable';
-import availableStocks from './stocks.json'
+import Header from '../../components/Header';
+import Table from '../../components/Table';
+import stocks from '../../data/stocks.json'
+import { getUserStocks } from '../../utils/localStorage'
 
 function Wallet() {
+  const userStocks = getUserStocks();
+  const availableStocks = stocks
+    .filter((availableStock) => !userStocks
+      .some((myStock) => myStock.id === availableStock.id));
+
   const columns = [
     'Ação',
     'Quantidade',
     'Valor (R$)',
     'Negociar',
-  ]
+  ];
+
   const navigate = useNavigate();
 
-  const onButtonBuy = () => {
-    navigate('/negotiate');
+  const handleOpenNegotiate = (id) => {
+    navigate(`/negotiate/${id}`);
   };
 
-  const onButtonSell = () => {
-    navigate('/negotiate');
-  };
-
-  const renderRows = (stocks) => {
+  const renderStocks = (stocks) => {
     return stocks?.map((stock) => (
       <tr key={stock.id}>
         <td>
@@ -37,18 +40,22 @@ function Wallet() {
         <td>
           <button
             type="button"
-            onClick={onButtonBuy}
+            onClick={() => handleOpenNegotiate(stock.id)}
           >
             Comprar
           </button>
         </td>
         <td>
-          <button
-            type="button"
-            onClick={onButtonSell}
-          >
-            Vender
-          </button>
+          {userStocks.some((item) => item.id === stock.id) ?
+            (
+              <button
+                type="button"
+                onClick={() => handleOpenNegotiate(stock.id)}
+              >
+                Vender
+              </button>
+            ) : null
+          }
         </td>
       </tr>
     ))
@@ -58,15 +65,11 @@ function Wallet() {
     <div>
       <Header />
 
-      <h2>
-        Minhas Ações:
-      </h2>
-      <StocksTable columns={columns} renderRows={() => renderRows([])} />
+      <h2>Minhas Ações:</h2>
+      <Table columns={columns} renderRows={() => renderStocks(userStocks)} />
 
-      <h2>
-        Disponíveis para investir:
-      </h2>
-      <StocksTable columns={columns} renderRows={() => renderRows(availableStocks)} />
+      <h2>Disponíveis para investir:</h2>
+      <Table columns={columns} renderRows={() => renderStocks(availableStocks)} />
     </div>
   )
 }
