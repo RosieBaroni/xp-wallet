@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import { saveBalance, getBalance } from '../../utils/localStorage'
+import { formatCurrencyToBRL } from '../../utils/currency';
 
 function Balance() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function Balance() {
       <Header />
 
       <h2>Saldo em Conta:</h2>
-      <p>{`R$ ${(balance).toFixed(2)}`}</p>
+      <p>{formatCurrencyToBRL(balance)}</p>
 
       <form onSubmit={handleSave}>
         <label>
@@ -55,7 +56,6 @@ function Balance() {
             name="depositValue"
             placeholder="Informe o valor do depósito"
             min="1"
-            step=".01"
             value={depositValue}
             onChange={({ target }) => setDepositValue(target.value)}
             required
@@ -74,7 +74,6 @@ function Balance() {
             name="removeValue"
             placeholder="Informe o valor da retirada"
             min="1"
-            step=".01"
             max={balance}
             value={withdrawValue}
             onChange={({ target }) => setWithdrawValue(target.value)}
