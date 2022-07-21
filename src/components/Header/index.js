@@ -1,8 +1,11 @@
 import React from 'react';
-import { getEmail } from '../../utils/localStorage';
+
+import { getEmail, getBalance } from '../../utils/localStorage';
+import { formatCurrencyToBRL } from '../../utils/currency';
 
 function Header() {
   const email = getEmail().email;
+  const balance = getBalance();
 
   return (
     <header>
@@ -10,6 +13,10 @@ function Header() {
         <p data-testid="email-field">
           Usuário:
           {email}
+        </p>
+        <p>
+          Saldo:{' '}
+          {formatCurrencyToBRL(balance)}
         </p>
       </div>
     </header>
