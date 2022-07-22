@@ -4,7 +4,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Table from '../../components/Table';
 import stocks from '../../data/stocks.json'
-import { saveUserStocks, getUserStocks } from '../../utils/localStorage'
+import { formatCurrencyToBRL } from '../../utils/currency';
+import {
+  saveUserStocks,
+  getUserStocks,
+  saveBalance,
+  getBalance
+} from '../../utils/localStorage';
 
 function Negotiate() {
   const navigate = useNavigate();
@@ -12,12 +18,13 @@ function Negotiate() {
   const userStocks = getUserStocks();
   const [saleAmount, setSaleAmount] = useState('');
   const [purchaseAmount, setPurchaseAmount] = useState('');
+  const balance = getBalance();
 
   const columns = [
     'Ação',
     'Quantidade',
-    'Valor unitário (R$)',
-    'Valor total (R$)',
+    'Valor unitário',
+    'Valor total',
   ];
 
   const getStock = () => {
@@ -44,10 +51,10 @@ function Negotiate() {
         {stock.amount}
       </td>
       <td>
-        {stock.price}
+        {formatCurrencyToBRL(stock.price)}
       </td>
       <td>
-        {stock.price * stock.amount}
+        {formatCurrencyToBRL(stock.price * stock.amount)}
       </td>
     </tr>
   );
@@ -57,11 +64,28 @@ function Negotiate() {
     const userStockIndex = userStocks?.findIndex(({ symbol }) => symbol === stock.symbol)
 
     if (userStockIndex !== -1) {
+      if (purchaseAmount) {
+        userStocks[userStockIndex] = {
+          ...stock,
+          amount: Number(stock.amount) + Number(purchaseAmount),
+        }
+
+        saveUserStocks(userStocks);
+
+        return;
+      }
+
+      if (saleAmount === stock.amount) {
+        saveUserStocks(
+          userStocks.filter(({ symbol }) => symbol !== stock.symbol)
+        );
+
+        return
+      }
+
       userStocks[userStockIndex] = {
         ...stock,
-        amount: purchaseAmount ?
-          Number(stock.amount) + Number(purchaseAmount)
-          : Number(stock.amount) - Number(saleAmount),
+        amount: Number(stock.amount) - Number(saleAmount),
       }
 
       saveUserStocks(userStocks);
@@ -75,15 +99,33 @@ function Negotiate() {
     ]);
   }
 
+  const calculateBalance = () => {
+    if (saleAmount) {
+      saveBalance((balance + saleAmount * stock.price).toFixed(2));
+
+      return;
+    }
+
+    saveBalance((balance - purchaseAmount * stock.price).toFixed(2));
+  }
 
   const handleSave = () => {
     const confirmation = window.confirm('Deseja salvar as alterações?');
 
     if (confirmation) {
+      calculateBalance();
       save();
 
       navigate('/wallet');
     }
+  }
+
+  const goBack = () => {
+    navigate('/wallet');
+  }
+
+  const goBalance = () => {
+    navigate('/balance');
   }
 
   return (
@@ -102,7 +144,7 @@ function Negotiate() {
             name="purchaseAmount"
             placeholder="Informe a quantidade de compra"
             min="0"
-            // max={valor que tenho na minha carteira}
+            max={Math.floor(balance / stock.price)}
             value={purchaseAmount}
             onChange={({ target }) => setPurchaseAmount(target.value)}
             required
@@ -110,8 +152,8 @@ function Negotiate() {
         </label>
 
         <p>
-          Valor total da compra (R$)
-          {(purchaseAmount * stock.price).toFixed(2)}
+          Valor total da compra{' '}
+          {formatCurrencyToBRL(purchaseAmount * stock.price)}
         </p>
 
         <input type="submit" value="Comprar" />
@@ -128,7 +170,7 @@ function Negotiate() {
                   id="saleAmount"
                   name="saleAmount"
                   placeholder="Informe a quantidade de venda"
-                  min="0"
+                  min="1"
                   max={stock.amount}
                   value={saleAmount}
                   onChange={({ target }) => setSaleAmount(target.value)}
@@ -137,19 +179,27 @@ function Negotiate() {
               </label>
 
               <p>
-                Valor total da venda (R$)
-                {(saleAmount * stock.price).toFixed(2)}
+                Valor total da venda{' '}
+                {formatCurrencyToBRL(saleAmount * stock.price)}
               </p>
 
               <input type="submit" value="Vender" />
             </>
           ) : null
         }
+
         <button
           type="button"
-          onClick={handleSave}
+          onClick={goBack}
         >
           Voltar
+        </button>
+
+        <button
+          type="button"
+          onClick={goBalance}
+        >
+          Depósito/Retirada
         </button>
       </form>
     </main >
