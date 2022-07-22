@@ -1,0 +1,25 @@
+header {
+  background: #1f1f1f;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.user-info {
+  display: flex;
+  font-size: 18px;
+  gap: 50px;
+  grid-gap: 50px;
+}
+
+h1 {
+  color: #ffc709;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+p {
+  color: #FFFFFF;
+  font-family: sans-serif;
+}
