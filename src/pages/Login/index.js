@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { saveEmail } from '../../utils/localStorage'
+import { saveEmail, getBalance } from '../../utils/localStorage'
+import './styles.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setDisabled] = useState(true);
   const navigate = useNavigate();
+  const balance = getBalance();
 
   useEffect(() => {
     const isDisabled = () => {
@@ -16,9 +18,13 @@ function Login() {
       if (email.includes('@')
         && email.includes('.com')
         && password.length >= minPassLength
-      ) { setDisabled(false) };
+      ) {
+        setDisabled(false)
 
-      return;
+        return;
+      };
+
+      setDisabled(true)
     };
 
     isDisabled();
@@ -26,6 +32,13 @@ function Login() {
 
   const onButtonClick = () => {
     saveEmail(email);
+
+    if (balance === 0) {
+      navigate('/balance');
+
+      return;
+    }
+
     navigate('/wallet');
   };
 
@@ -58,6 +71,7 @@ function Login() {
           />
 
           <button
+            className="button"
             type="button"
             disabled={isDisabled}
             onClick={onButtonClick}
