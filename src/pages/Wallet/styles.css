@@ -1,0 +1,41 @@
+.content-wallet {
+  padding: 70px 300px;
+}
+
+h2 {
+  background: #333333;
+  padding: 30px;
+  border-radius: 8px;
+  color:  #FFFFFF;
+  border: 4px solid #ccc;
+}
+
+button {
+  background-color: #58c068fc;
+  margin: 10px;
+  padding: 16px;
+  width: 150px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-radius: 2px;
+  border: none;
+}
+
+.buttonSale {
+  background-color: #e0304a;
+  margin: 10px;
+  padding: 16px;
+  width: 150px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-radius: 2px;
+  border: none;
+}

@@ -6,6 +6,7 @@ import Table from '../../components/Table';
 import stocks from '../../data/stocks.json'
 import { getUserStocks } from '../../utils/localStorage'
 import { formatCurrencyToBRL } from '../../utils/currency';
+import './styles.css';
 
 function Wallet() {
   const userStocks = getUserStocks();
@@ -54,7 +55,7 @@ function Wallet() {
 
           {userStocks.some((item) => item.id === stock.id) ?
             (
-              <button
+              <button className='buttonSale'
                 type="button"
                 onClick={() => handleOpenNegotiate(stock.id)}
               >
@@ -67,44 +68,24 @@ function Wallet() {
     ))
   }
 
-  const goBack = () => {
-    navigate('/');
-  }
-
-  const goBalance = () => {
-    navigate('/balance');
-  }
-
   return (
-    <div>
+    <main className="container-wallet">
       <Header />
 
-      <h2>Minhas Ações:</h2>
-      <Table columns={
-        [...columns, 'Valor total', 'Negociar']}
-        renderRows={() => renderStocks(userStocks)}
-      />
+      <div className="content-wallet">
+        <h2>Minhas Ações:</h2>
+        <Table columns={
+          [...columns, 'Valor total', 'Negociar']}
+          renderRows={() => renderStocks(userStocks)}
+        />
 
-      <h2>Disponíveis para investir:</h2>
-      <Table columns={
-        [...columns, 'Negociar']}
-        renderRows={() => renderStocks(availableStocks)}
-      />
-
-      <button
-        type="button"
-        onClick={goBack}
-      >
-        Voltar
-      </button>
-
-      <button
-        type="button"
-        onClick={goBalance}
-      >
-        Depósito/Retirada
-      </button>
-    </div>
+        <h2>Disponíveis para investir:</h2>
+        <Table columns={
+          [...columns, 'Negociar']}
+          renderRows={() => renderStocks(availableStocks)}
+        />
+      </div>
+    </main>
   )
 }
 
