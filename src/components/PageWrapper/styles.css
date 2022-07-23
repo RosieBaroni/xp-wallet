@@ -1,0 +1,9 @@
+.page {
+  padding: 70px 300px;
+}
+
+.page__content {
+  background: #333;
+  border-radius: 8px;
+  padding: 50px;
+}
