@@ -1,0 +1,55 @@
+.button {
+  padding: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-radius: 2px;
+  border: none;
+}
+
+.button:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+.button--primary {
+  background-color: #58c068;
+  color: #FFFFFF;
+}
+
+.button--secondary {
+  background-color: #e0304a;
+  color: #FFFFFF;
+}
+
+.button--success {
+  background-color: #ffc709;
+  color: #1f1f1f;
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+.button--small {
+  width: 150px;
+}
+
+.button--medium {
+  width: 220px;
+}
+
+.button--large {
+  width: 300px;
+}
+
+.button--margin-none {
+  margin: 0;
+}
+
+.button--margin-small {
+  margin: 8px;
+}
+
