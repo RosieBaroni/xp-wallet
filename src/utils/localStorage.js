@@ -7,7 +7,6 @@ export const saveUserStocks = (stocks) => {
 }
 
 export const saveBalance = (value) => {
-  console.log(value)
   localStorage.setItem('balance', JSON.stringify(value));
 }
 
