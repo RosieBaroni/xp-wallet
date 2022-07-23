@@ -1,19 +1,13 @@
-.container-table {
-  background: #1f1f1f;
-  padding: 50px;
-  border-radius: 8px;
-} 
-
-table {
+.table {
   border-collapse: collapse;
-  color: #262b33;
   font-size: 18px;
+  margin: 50px 0 80px;
   width: 100%;
 }
 
-table th , table td {
+.table th , .table td {
   border-bottom: 1px solid #ccc;
   padding: 15px;
-  color: #FFFFFF;
+  color: #FFF;
   text-align: center;
 }
