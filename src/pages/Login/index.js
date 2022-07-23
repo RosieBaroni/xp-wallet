@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import Title from '../../components/Title';
 import { saveEmail, getBalance } from '../../utils/localStorage'
 import './styles.css';
 
@@ -30,7 +33,7 @@ function Login() {
     isDisabled();
   }, [email, password]);
 
-  const onButtonClick = () => {
+  const onButtonLogin = () => {
     saveEmail(email);
 
     if (balance === 0) {
@@ -43,43 +46,39 @@ function Login() {
   };
 
   return (
-    <main className="container">
-      <div className="content" data-testid="page-login">
-        <h1>XP Wallet</h1>
+    <main className="login-page">
+      <form className="login-page__form">
+        <Title as="h1" highlight>XP Wallet</Title>
 
-        <form className="form-login">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite seu email"
-            data-testid="email-input"
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-            required
-          />
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={({ target }) => setEmail(target.value)}
+          required
+        />
 
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Digite sua senha"
-            data-testid="password-input"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-            required
-          />
+        <Input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Digite sua senha"
+          value={password}
+          onChange={({ target }) => setPassword(target.value)}
+          required
+        />
 
-          <button
-            className="button"
-            type="button"
-            disabled={isDisabled}
-            onClick={onButtonClick}
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
+        <Button
+          type="button"
+          variant="success"
+          disabled={isDisabled}
+          onClick={onButtonLogin}
+        >
+          Entrar
+        </Button>
+      </form>
     </main>
   );
 }
