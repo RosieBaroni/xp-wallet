@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
+import Button from '../Button';
 import { getEmail, getBalance } from '../../utils/localStorage';
 import { formatCurrencyToBRL } from '../../utils/currency';
 import './styles.css';
@@ -34,13 +35,14 @@ function Header() {
 
         {hasButtonBalance() ?
           (
-            <button
-              className="buttonBalance"
+            <Button
               type="button"
+              variant="success"
+              size="medium"
               onClick={onButtonBalance}
             >
               Depósito/Retirada
-            </button>
+            </Button>
           ) : null
         }
 
