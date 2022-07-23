@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import LoggedLayout from '../../components/LoggedLayout';
+import PageWrapper from '../../components/PageWrapper';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Input from '../../components/Input';
@@ -132,70 +133,68 @@ function Negotiate() {
 
   return (
     <LoggedLayout>
-      <main className="negotiate-page">
-        <div className="negotiate-page__content">
-          <Title>Comprar/Vender Ação:</Title>
-          <Table columns={columns} renderRows={renderRow} />
+      <PageWrapper>
+        <Title>Comprar/Vender Ação:</Title>
+        <Table columns={columns} renderRows={renderRow} />
 
-          <form className="negotiate-page__form" onSubmit={handleSave}>
-            <Input
-              label={`
+        <form className="negotiate-page-form" onSubmit={handleSave}>
+          <Input
+            label={`
                 Valor total da compra
                 ${formatCurrencyToBRL(purchaseAmount * stock.price)}
               `}
-              type="number"
-              id="purchaseAmount"
-              name="purchaseAmount"
-              placeholder="Informe a quantidade de compra"
-              min="1"
-              max={Math.floor(balance / stock.price)}
-              value={purchaseAmount}
-              onChange={({ target }) => setPurchaseAmount(target.value)}
-              required
-            />
+            type="number"
+            id="purchaseAmount"
+            name="purchaseAmount"
+            placeholder="Informe a quantidade de compra"
+            min="1"
+            max={Math.floor(balance / stock.price)}
+            value={purchaseAmount}
+            onChange={({ target }) => setPurchaseAmount(target.value)}
+            required
+          />
 
-            <Button
-              variant="primary"
-              size="medium"
-              margin="small"
-            >
-              Comprar
-            </Button>
-          </form>
+          <Button
+            variant="primary"
+            size="medium"
+            margin="small"
+          >
+            Comprar
+          </Button>
+        </form>
 
-          <form className="negotiate-page__form" onSubmit={handleSave}>
-            {userStocks.some((item) => item.id === stock.id) ?
-              (
-                <>
-                  <Input
-                    label={`
+        <form className="negotiate-page-form" onSubmit={handleSave}>
+          {userStocks.some((item) => item.id === stock.id) ?
+            (
+              <>
+                <Input
+                  label={`
                       Valor total da venda
                       ${formatCurrencyToBRL(saleAmount * stock.price)}
                     `}
-                    type="number"
-                    id="saleAmount"
-                    name="saleAmount"
-                    placeholder="Informe a quantidade de venda"
-                    min="1"
-                    max={stock.amount}
-                    value={saleAmount}
-                    onChange={({ target }) => setSaleAmount(target.value)}
-                    required
-                  />
+                  type="number"
+                  id="saleAmount"
+                  name="saleAmount"
+                  placeholder="Informe a quantidade de venda"
+                  min="1"
+                  max={stock.amount}
+                  value={saleAmount}
+                  onChange={({ target }) => setSaleAmount(target.value)}
+                  required
+                />
 
-                  <Button
-                    variant="secondary"
-                    size="medium"
-                    margin="small"
-                  >
-                    Vender
-                  </Button>
-                </>
-              ) : null
-            }
-          </form>
-        </div>
-      </main>
+                <Button
+                  variant="secondary"
+                  size="medium"
+                  margin="small"
+                >
+                  Vender
+                </Button>
+              </>
+            ) : null
+          }
+        </form>
+      </PageWrapper>
     </LoggedLayout >
   )
 }

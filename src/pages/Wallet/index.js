@@ -2,14 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import LoggedLayout from '../../components/LoggedLayout';
+import PageWrapper from '../../components/PageWrapper';
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Table from '../../components/Table';
 import stocks from '../../data/stocks.json'
 import { getUserStocks } from '../../utils/localStorage'
 import { formatCurrencyToBRL } from '../../utils/currency';
-import './styles.css';
-
 
 function Wallet() {
   const userStocks = getUserStocks();
@@ -79,22 +78,20 @@ function Wallet() {
 
   return (
     <LoggedLayout>
-      <main className="wallet-page">
-        <div className="wallet-page__content">
-          <Title>Minhas Ações:</Title>
-          <Table columns={
-            [...columns, 'Valor total', 'Negociar']}
-            renderRows={() => renderStocks(userStocks)}
-          />
+      <PageWrapper>
+        <Title>Minhas Ações:</Title>
+        <Table columns={
+          [...columns, 'Valor total', 'Negociar']}
+          renderRows={() => renderStocks(userStocks)}
+        />
 
-          <Title>Disponíveis para investir:</Title>
-          <Table columns={
-            [...columns, 'Negociar']}
-            renderRows={() => renderStocks(availableStocks)}
-          />
-        </div>
-      </main>
-    </LoggedLayout>
+        <Title>Disponíveis para investir:</Title>
+        <Table columns={
+          [...columns, 'Negociar']}
+          renderRows={() => renderStocks(availableStocks)}
+        />
+      </PageWrapper>
+    </LoggedLayout >
   )
 }
 
