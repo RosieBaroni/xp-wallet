@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../../components/Header';
+import LoggedLayout from '../../components/LoggedLayout';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import Title from '../../components/Title';
 import { saveBalance, getBalance } from '../../utils/localStorage'
-import { formatCurrencyToBRL } from '../../utils/currency';
+import './styles.css';
 
 function Balance() {
   const navigate = useNavigate();
@@ -36,61 +39,72 @@ function Balance() {
     }
   }
 
-  const goBack = () => {
+  const goBackWallet = () => {
     navigate('/wallet');
   }
 
   return (
-    <div>
-      <Header />
+    <LoggedLayout>
+      <main className="balance-page">
+        <div className="balance-page__content">
+          <Title>Depósito/Retirada</Title>
 
-      <h2>Saldo em Conta:</h2>
-      <p>{formatCurrencyToBRL(balance)}</p>
+          <div className='form-balance'>
+            <form className="balance-page__form" onSubmit={handleSave}>
+              <Input
+                type="number"
+                id="depositValue"
+                name="depositValue"
+                placeholder="Informe o valor do depósito"
+                min="1"
+                value={depositValue}
+                onChange={({ target }) => setDepositValue(target.value)}
+                required
+              />
 
-      <form onSubmit={handleSave}>
-        <label>
-          Depósito
-          <input
-            type="number"
-            id="depositValue"
-            name="depositValue"
-            placeholder="Informe o valor do depósito"
-            min="1"
-            value={depositValue}
-            onChange={({ target }) => setDepositValue(target.value)}
-            required
-          />
-        </label>
+              <Button
+                variant="primary"
+                size="medium"
+                margin="small"
+              >
+                Depositar
+              </Button>
+            </form>
 
-        <input type="submit" value="Depositar" />
-      </form>
+            <form className="balance-page__form" onSubmit={handleSave}>
+              <Input
+                type="number"
+                id="removeValue"
+                name="removeValue"
+                placeholder="Informe o valor da retirada"
+                min="1"
+                max={balance}
+                value={withdrawValue}
+                onChange={({ target }) => setWithdrawValue(target.value)}
+                required
+              />
 
-      <form onSubmit={handleSave}>
-        <label>
-          Retirada
-          <input
-            type="number"
-            id="removeValue"
-            name="removeValue"
-            placeholder="Informe o valor da retirada"
-            min="1"
-            max={balance}
-            value={withdrawValue}
-            onChange={({ target }) => setWithdrawValue(target.value)}
-            required
-          />
-        </label>
+              <Button
+                variant="secondary"
+                size="medium"
+                margin="small"
+              >
+                Retirar
+              </Button>
+            </form>
 
-        <input type="submit" value="Retirar" />
-      </form>
-
-      <button
-        type="button"
-        onClick={goBack}
-      >
-        Voltar
-      </button>
-    </div>
+            <Button
+              type="button"
+              variant="success"
+              size="medium"
+              onClick={goBackWallet}
+            >
+              Carteira
+            </Button>
+          </div>
+        </div>
+      </main>
+    </LoggedLayout >
   )
 }
 
