@@ -1,12 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../../components/Header';
+import LoggedLayout from '../../components/LoggedLayout';
+import Button from '../../components/Button';
+import Title from '../../components/Title';
 import Table from '../../components/Table';
 import stocks from '../../data/stocks.json'
 import { getUserStocks } from '../../utils/localStorage'
 import { formatCurrencyToBRL } from '../../utils/currency';
 import './styles.css';
+
 
 function Wallet() {
   const userStocks = getUserStocks();
@@ -46,21 +49,27 @@ function Wallet() {
           ) : null
         }
         <td>
-          <button
+          <Button
             type="button"
+            variant="primary"
+            size="small"
+            margin="small"
             onClick={() => handleOpenNegotiate(stock.id)}
           >
             Comprar
-          </button>
+          </Button>
 
           {userStocks.some((item) => item.id === stock.id) ?
             (
-              <button className='buttonSale'
+              <Button
                 type="button"
+                variant="secondary"
+                size="small"
+                margin="small"
                 onClick={() => handleOpenNegotiate(stock.id)}
               >
                 Vender
-              </button>
+              </Button>
             ) : null
           }
         </td>
@@ -69,23 +78,23 @@ function Wallet() {
   }
 
   return (
-    <main className="container-wallet">
-      <Header />
+    <LoggedLayout>
+      <main className="wallet-page">
+        <div className="wallet-page__content">
+          <Title>Minhas Ações:</Title>
+          <Table columns={
+            [...columns, 'Valor total', 'Negociar']}
+            renderRows={() => renderStocks(userStocks)}
+          />
 
-      <div className="content-wallet">
-        <h2>Minhas Ações:</h2>
-        <Table columns={
-          [...columns, 'Valor total', 'Negociar']}
-          renderRows={() => renderStocks(userStocks)}
-        />
-
-        <h2>Disponíveis para investir:</h2>
-        <Table columns={
-          [...columns, 'Negociar']}
-          renderRows={() => renderStocks(availableStocks)}
-        />
-      </div>
-    </main>
+          <Title>Disponíveis para investir:</Title>
+          <Table columns={
+            [...columns, 'Negociar']}
+            renderRows={() => renderStocks(availableStocks)}
+          />
+        </div>
+      </main>
+    </LoggedLayout>
   )
 }
 
