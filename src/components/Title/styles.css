@@ -1,0 +1,9 @@
+.title {
+  color:  #FFF;
+}
+
+.title--highlight {
+  color: #ffc709;
+  font-size: 56px;
+  margin-bottom: 50px;
+}
