@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import Header from '../../components/Header';
+import LoggedLayout from '../../components/LoggedLayout';
+import Button from '../../components/Button';
+import Title from '../../components/Title';
+import Input from '../../components/Input';
 import Table from '../../components/Table';
 import stocks from '../../data/stocks.json'
 import { formatCurrencyToBRL } from '../../utils/currency';
@@ -11,6 +14,7 @@ import {
   saveBalance,
   getBalance
 } from '../../utils/localStorage';
+import './styles.css';
 
 function Negotiate() {
   const navigate = useNavigate();
@@ -101,15 +105,21 @@ function Negotiate() {
 
   const calculateBalance = () => {
     if (saleAmount) {
-      saveBalance((balance + saleAmount * stock.price).toFixed(2));
+      saveBalance(
+        (Number(balance) + Number(saleAmount) * Number(stock.price)).toFixed(2)
+      );
 
       return;
     }
 
-    saveBalance((balance - purchaseAmount * stock.price).toFixed(2));
+    saveBalance(
+      (Number(balance) - Number(purchaseAmount) * Number(stock.price)).toFixed(2)
+    );
   }
 
-  const handleSave = () => {
+  const handleSave = (event) => {
+    event.preventDefault();
+
     const confirmation = window.confirm('Deseja salvar as alterações?');
 
     if (confirmation) {
@@ -120,89 +130,73 @@ function Negotiate() {
     }
   }
 
-  const goBack = () => {
-    navigate('/wallet');
-  }
-
-  const goBalance = () => {
-    navigate('/balance');
-  }
-
   return (
-    <main className="container">
-      <Header />
+    <LoggedLayout>
+      <main className="negotiate-page">
+        <div className="negotiate-page__content">
+          <Title>Comprar/Vender Ação:</Title>
+          <Table columns={columns} renderRows={renderRow} />
 
-      <h1>Comprar/Vender Ação:</h1>
-      <Table columns={columns} renderRows={renderRow} />
+          <form className="negotiate-page__form" onSubmit={handleSave}>
+            <Input
+              label={`
+                Valor total da compra
+                ${formatCurrencyToBRL(purchaseAmount * stock.price)}
+              `}
+              type="number"
+              id="purchaseAmount"
+              name="purchaseAmount"
+              placeholder="Informe a quantidade de compra"
+              min="1"
+              max={Math.floor(balance / stock.price)}
+              value={purchaseAmount}
+              onChange={({ target }) => setPurchaseAmount(target.value)}
+              required
+            />
 
-      <form onSubmit={handleSave}>
-        <label>
-          Comprar
-          <input
-            type="number"
-            id="purchaseAmount"
-            name="purchaseAmount"
-            placeholder="Informe a quantidade de compra"
-            min="0"
-            max={Math.floor(balance / stock.price)}
-            value={purchaseAmount}
-            onChange={({ target }) => setPurchaseAmount(target.value)}
-            required
-          />
-        </label>
+            <Button
+              variant="primary"
+              size="medium"
+              margin="small"
+            >
+              Comprar
+            </Button>
+          </form>
 
-        <p>
-          Valor total da compra{' '}
-          {formatCurrencyToBRL(purchaseAmount * stock.price)}
-        </p>
+          <form className="negotiate-page__form" onSubmit={handleSave}>
+            {userStocks.some((item) => item.id === stock.id) ?
+              (
+                <>
+                  <Input
+                    label={`
+                      Valor total da venda
+                      ${formatCurrencyToBRL(saleAmount * stock.price)}
+                    `}
+                    type="number"
+                    id="saleAmount"
+                    name="saleAmount"
+                    placeholder="Informe a quantidade de venda"
+                    min="1"
+                    max={stock.amount}
+                    value={saleAmount}
+                    onChange={({ target }) => setSaleAmount(target.value)}
+                    required
+                  />
 
-        <input type="submit" value="Comprar" />
-      </form>
-
-      <form onSubmit={handleSave}>
-        {userStocks.some((item) => item.id === stock.id) ?
-          (
-            <>
-              <label>
-                Vender
-                <input
-                  type="number"
-                  id="saleAmount"
-                  name="saleAmount"
-                  placeholder="Informe a quantidade de venda"
-                  min="1"
-                  max={stock.amount}
-                  value={saleAmount}
-                  onChange={({ target }) => setSaleAmount(target.value)}
-                  required
-                />
-              </label>
-
-              <p>
-                Valor total da venda{' '}
-                {formatCurrencyToBRL(saleAmount * stock.price)}
-              </p>
-
-              <input type="submit" value="Vender" />
-            </>
-          ) : null
-        }
-
-        <button
-          type="button"
-          onClick={goBack}
-        >
-          Voltar
-        </button>
-
-        <button
-          type="button"
-          onClick={goBalance}
-        >
-          Depósito/Retirada
-        </button>
-      </form>
-    </main >
+                  <Button
+                    variant="secondary"
+                    size="medium"
+                    margin="small"
+                  >
+                    Vender
+                  </Button>
+                </>
+              ) : null
+            }
+          </form>
+        </div>
+      </main>
+    </LoggedLayout >
   )
 }
 

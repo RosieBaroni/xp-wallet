@@ -1,0 +1,13 @@
+.negotiate-page {
+  padding: 70px 300px;
+}
+
+.negotiate-page__content {
+  background: #333;
+  border-radius: 8px;
+  padding: 50px;
+}
+
+.negotiate-page__form {
+  margin-bottom: 20px;
+}
