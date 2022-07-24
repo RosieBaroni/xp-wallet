@@ -70,27 +70,31 @@ function Balance() {
           </Button>
         </form>
 
-        <form className="balance-page-form" onSubmit={handleSave}>
-          <Input
-            type="number"
-            id="removeValue"
-            name="removeValue"
-            placeholder="Informe o valor da retirada"
-            min="1"
-            max={balance}
-            value={withdrawValue}
-            onChange={({ target }) => setWithdrawValue(target.value)}
-            required
-          />
+        {balance ?
+          (
+            <form className="balance-page-form" onSubmit={handleSave}>
+              <Input
+                type="number"
+                id="removeValue"
+                name="removeValue"
+                placeholder="Informe o valor da retirada"
+                min="0.01"
+                max={Number(balance).toFixed(2)}
+                value={withdrawValue}
+                onChange={({ target }) => setWithdrawValue(target.value)}
+                required
+              />
 
-          <Button
-            variant="secondary"
-            size="medium"
-            margin="small"
-          >
-            Retirar
-          </Button>
-        </form>
+              <Button
+                variant="secondary"
+                size="medium"
+                margin="small"
+              >
+                Retirar
+              </Button>
+            </form>
+          ) : null
+        }
 
         <Button
           type="button"
