@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Projeto XP Wallet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Neste projeto foi desenvolvido um aplicativo de investimento em ações, com algumas funcionalidades de conta digital, sendo elas:
 
-## Available Scripts
+- Realizar login;
+- Visualizar a tabela com ações disponíveis para negociação;
+- Visualizar a tabela com ações da carteira do usuário;
+- Compra/Venda das ações da carteira do usuário;
+- Visualizar o saldo disponível;
+- Depositar/Retirar saldo.
 
-In the project directory, you can run:
+[Acessar projeto em produção](https://xp-wallet-eta.vercel.app/)
 
-### `npm start`
+![](./xp-wallet.gif)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Desenvolvimento
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Este projeto foi desenvolvido como desafio técnico proposto pela XP Inc.
 
-### `npm test`
+Nesta aplicação foi utilizado o React com componentes funcionais e faz uso do localStorage para o armazenamento dos dados localmente.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A aplicação faz uso dos dados disponíveis no site da [Yahoo finance](https://finance.yahoo.com/quote/%5EBVSP/components?p=%5EBVSP) que foram mockados em um JSON. 
 
-### `npm run build`
+Para a formatação monetária foi utilizado o método `Intl.NumberFormat` (que faz parte da API de internacionalização do ECMAScript) que formata um número de acordo com a localidade e as opções de formatação.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Habilidades
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React functional component;
+- React Hook `useState`;
+- React Hook `useEffect`;
+- React Router Hook `useNavigate`;
+- React Router Hook `useParams`;
+- BEM CSS;
+- Mobile first;
+- Deploy Vercel.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Para rodar a aplicação
 
-### `npm run eject`
+### Clone o repositório:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `git clone git@github.com:RosieBaroni/xp-wallet.git`
+- Entre na pasta do repositório que você acabou de clonar:
+  - `cd xp-wallet`
+- Instale as dependências:
+  - `npm install`
+- Inicialize o projeto:
+  - `npm start` (uma nova página deve abrir no seu navegador com a aplicação XP Wallet).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Ou acesse o link em produção: 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Acessar projeto em produção](https://xp-wallet-eta.vercel.app/)
