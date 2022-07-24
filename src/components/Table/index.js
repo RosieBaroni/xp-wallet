@@ -4,19 +4,21 @@ import './styles.css';
 
 function Table({ columns, renderRows }) {
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          {columns.map((column) => (
-            <th key={column}>{column}</th>
-          ))}
-        </tr>
-      </thead>
+    <div className="table-container">
+      <table className="table">
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th key={column}>{column}</th>
+            ))}
+          </tr>
+        </thead>
 
-      <tbody>
-        {renderRows()}
-      </tbody>
-    </table>
+        <tbody>
+          {renderRows()}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

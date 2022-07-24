@@ -1,9 +1,14 @@
 .title {
-  color:  #FFF;
+  color: #FFF;
 }
 
 .title--highlight {
   color: #ffc709;
-  font-size: 56px;
-  margin-bottom: 50px;
+  font-size: 40px;
+}
+
+@media (min-width: 769px) {
+  .title--highlight {
+    font-size: 56px;
+  }
 }

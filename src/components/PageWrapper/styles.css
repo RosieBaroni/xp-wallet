@@ -1,9 +1,27 @@
 .page {
-  padding: 70px 300px;
+  padding: 0;
 }
 
 .page__content {
   background: #333;
-  border-radius: 8px;
-  padding: 50px;
+  padding: 30px;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .page {
+    padding: 70px 0;
+  }
+
+  .page__content {
+    border-radius: 8px;
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+
+@media (min-width: 769px) {
+  .page__content {
+    width: 70%;
+  }
 }

@@ -5,6 +5,7 @@ import Button from '../Button';
 import { getEmail, getBalance } from '../../utils/localStorage';
 import { formatCurrencyToBRL } from '../../utils/currency';
 import './styles.css';
+import Title from '../Title';
 
 function Header() {
   const email = getEmail().email;
@@ -19,10 +20,10 @@ function Header() {
   const hasButtonBalance = () => location.pathname !== '/balance';
 
   return (
-    <header>
-      <h1>XP Wallet</h1>
+    <header className="header">
+      <Title as="h1" highlight>XP Wallet</Title>
 
-      <div className="user-info">
+      <div className="header__info">
         <p data-testid="email-field">
           Usuário:{' '}
           {email}
@@ -46,7 +47,7 @@ function Header() {
           ) : null
         }
 
-        <Link className='link' to='/'>
+        <Link className="header__link" to='/'>
           Sair
           <img
             src={`${process.env.PUBLIC_URL}/assets/icons/logout.svg`}

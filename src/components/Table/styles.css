@@ -1,13 +1,25 @@
+.table-container {
+  overflow-x: auto;
+  margin: 50px 0 80px;
+}
+
 .table {
   border-collapse: collapse;
-  font-size: 18px;
-  margin: 50px 0 80px;
+  overflow-x: auto;
   width: 100%;
 }
 
 .table th , .table td {
   border-bottom: 1px solid #ccc;
-  padding: 15px;
+  font-size: 16px;
+  padding: 8px;
   color: #FFF;
   text-align: center;
+}
+
+@media (min-width: 480px) {
+  .table th , .table td {
+    font-size: 18px;
+    padding: 15px;
+  }
 }

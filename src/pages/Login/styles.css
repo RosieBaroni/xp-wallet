@@ -8,11 +8,9 @@
 }
 
 .login-page__form {
-  background-color: #121212;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 16px;
-  padding: 100px;
+  margin-top: 50px;
 }

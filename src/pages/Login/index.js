@@ -47,12 +47,13 @@ function Login() {
 
   return (
     <main className="login-page">
-      <form className="login-page__form">
-        <Title as="h1" highlight>XP Wallet</Title>
+      <Title as="h1" highlight>XP Wallet</Title>
 
+      <form className="login-page__form">
         <Input
           type="email"
           id="email"
+          data-test="email"
           name="email"
           placeholder="Digite seu email"
           value={email}
