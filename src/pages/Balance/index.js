@@ -78,7 +78,7 @@ function Balance() {
                 id="removeValue"
                 name="removeValue"
                 placeholder="Informe o valor da retirada"
-                min="0.01"
+                min="0"
                 max={Number(balance).toFixed(2)}
                 value={withdrawValue}
                 onChange={({ target }) => setWithdrawValue(target.value)}
