@@ -79,13 +79,20 @@ function Wallet() {
   return (
     <LoggedLayout>
       <PageWrapper>
-        <Title>Minhas Ações:</Title>
-        <Table columns={
-          [...columns, 'Valor total', 'Negociar']}
-          renderRows={() => renderStocks(userStocks)}
-        />
+        {userStocks?.length ?
+          (
+            <>
+              <Title>Minhas Ações:</Title>
+              <Table columns={
+                [...columns, 'Valor total', 'Negociar']}
+                renderRows={() => renderStocks(userStocks)}
+              />
+            </>
+          ) : null
+        }
 
-        <Title>Disponíveis para investir:</Title>
+
+        <Title>Ações disponíveis para investir:</Title>
         <Table columns={
           [...columns, 'Negociar']}
           renderRows={() => renderStocks(availableStocks)}
